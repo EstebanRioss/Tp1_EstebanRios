@@ -1,4 +1,4 @@
-package ar.edu.unju.fi.ejercicio18ModelP;
+package ar.edu.unju.fi.ejercicio18Model;
 
 public class Pais {
 	private String Codigo;
@@ -30,6 +30,4 @@ public class Pais {
 		System.out.println("Nombre: " + this.getNombre());
 		System.out.println("Codigo: " + this.getCodigo());
 	}
-	
-	
 }

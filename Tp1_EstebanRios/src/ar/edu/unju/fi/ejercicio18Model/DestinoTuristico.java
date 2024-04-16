@@ -1,5 +1,5 @@
 package ar.edu.unju.fi.ejercicio18Model;
-import ar.edu.unju.fi.ejercicio18ModelP.Pais;
+import ar.edu.unju.fi.ejercicio18Model.Pais;
 
 
 public class DestinoTuristico {

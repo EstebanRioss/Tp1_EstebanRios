@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-import ar.edu.unju.fi.ejercicio18ModelP.Pais;
+import ar.edu.unju.fi.ejercicio18Model.Pais;
 import ar.edu.unju.fi.ejercicio18Model.DestinoTuristico;
 
 public class Main {
