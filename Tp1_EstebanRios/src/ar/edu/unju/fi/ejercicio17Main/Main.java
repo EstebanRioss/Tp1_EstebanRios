@@ -183,13 +183,13 @@ public class Main {
 								case 3:{
 									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 									Boolean b = false;
-									LocalDate FechaNac = null;
+									LocalDate FechaN = null;
 									
 									System.out.println("Fecha de Nacimiento (yyyy-MM-dd): ");
 									do{
 										String Fecha = sc.next();
 										try {
-											FechaNac = LocalDate.parse(Fecha, formatter);
+											FechaN = LocalDate.parse(Fecha, formatter);
 											b = true;
 										}catch (Exception e) {
 											System.out.println("La fecha ingresada no es válida. Asegúrate de que esté en el formato correcto (yyyy-MM-dd).");

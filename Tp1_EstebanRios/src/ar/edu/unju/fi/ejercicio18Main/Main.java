@@ -43,18 +43,44 @@ public class Main {
 				DestinoTuristico Destino = new DestinoTuristico();
 				Boolean band = false;
 				
+				do {
+				try {
 				System.out.println("**Ingrese los datos del destino**");
 				System.out.println("Nombre: ");
 				String Nombre = sc.next();
 				Destino.setNombre(Nombre);
+				band = true;
+				} catch(Exception e) {
+					System.out.println("Ingreso mal el nombre");
+				}
+				}while(band != true);
+				band = false;
 				
-				System.out.println("Codigo: ");
-				String codigo = sc.next();
-				Destino.setCodigo(codigo);
+				do {
+					try {
+						System.out.println("Codigo: ");
+						String codigo = sc.next();
+						Destino.setCodigo(codigo);
+					band = true;
+					} catch(Exception e) {
+						System.out.println("Ingreso mal el codigo");
+					}
+					}while(band != true);
+				band = false;
 				
-				System.out.println("Precio: ");
-				Double Precio = sc.nextDouble();
-				Destino.setPrecio(Precio);
+				do {
+					try {
+						System.out.println("Precio: ");
+						Double Precio = sc.nextDouble();
+						Destino.setPrecio(Precio);
+					band = true;
+					} catch(Exception e) {
+						System.out.println("Ingreso mal el precio");
+					}
+					}while(band != true);
+				band = false;
+				
+				
 				
 				do {
 					System.out.println("Ingrese el codigo del pais: ");
@@ -70,9 +96,17 @@ public class Main {
 				}while (band != true);
 				band = false;
 				
-				System.out.println("Cantidad de dias: ");
-				int Dias = sc.nextInt();
-				Destino.setCantDia(Dias);
+				do {
+					try {
+						System.out.println("Cantidad de dias: ");
+						int Dias = sc.nextInt();
+						Destino.setCantDia(Dias);	
+						band = true;
+					} catch(Exception e) {
+						System.out.println("Ingreso mal el dia");
+					}
+					}while(band != true);
+				band = false;
 				
 				ListaDestino.add(CantDestino,Destino);
 				CantDestino++;
