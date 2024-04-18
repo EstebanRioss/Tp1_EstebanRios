@@ -55,6 +55,7 @@ public class Main {
 						band = true;
 					}catch (Exception e) {
 						System.out.println("La fecha ingresada no es válida. Asegúrate de que esté en el formato correcto (yyyy-MM-dd).");
+						System.out.println("Ingrese otra vez: ");
 					}
 				}while(band != true);
 				band = false;//para poder usar la variable mas adelante
@@ -107,7 +108,6 @@ public class Main {
 					}
 				}while(band != true);
 				
-				System.out.println("Hola");
 				
 				Jugadores.add(CantJugador,jugador);
 				CantJugador++;
@@ -116,22 +116,29 @@ public class Main {
 			case 2:{
 				Boolean band = false;
 				
-				System.out.println("**Mostrar Datos**");
-				System.out.println("Ingrese el nombre del jugador: ");
-				String nombre = sc.next();
-				System.out.println("Ingrese el apellido del jugador: ");
-				String apellido = sc.next();
-				
-				for (int i = 0 ; i < CantJugador ; i ++) {
-					if(	nombre.equals((Jugadores.get(i)).getNombre()) && apellido.equals((Jugadores.get(i)).getApellido()) ){
-						Jugadores.get(i).MostrarDatos();
-						band = true;
-						break;
+				do {
+					try {
+						System.out.println("**Mostrar Datos**");
+						System.out.println("Ingrese el nombre del jugador: ");
+						String nombre = sc.next();
+						System.out.println("Ingrese el apellido del jugador: ");
+						String apellido = sc.next();
+						
+						for (int i = 0 ; i < CantJugador ; i ++) {
+							if(	nombre.equals((Jugadores.get(i)).getNombre()) && apellido.equals((Jugadores.get(i)).getApellido()) ){
+								Jugadores.get(i).MostrarDatos();
+								band = true;
+								break;
+							}
+						}
+						if (band == false) {
+							System.out.println("No se encontro el jugador con nombre " + nombre + " y apellido " + apellido);
+						}
+					}catch(Exception e) {
+						System.out.println("Igreso mal la nacionalidad");
+						System.out.println("Ingrese otra vez: ");
 					}
-				}
-				if (band == false) {
-					System.out.println("No se encontro el jugador con nombre " + nombre + " y apellido " + apellido);
-				}
+				}while (band != true);
 				break;
 			}
 			case 3:{
@@ -146,148 +153,162 @@ public class Main {
 			case 4:{
 				Boolean band = false;
 				
-				System.out.println("**Modificar Datos**");
-				System.out.println("Ingrese el nombre del jugador: ");
-				String nombre = sc.next();
-				System.out.println("Ingrese el apellido del jugador: ");
-				String apellido = sc.next();
 				
-				for (int i = 0 ; i < CantJugador ; i ++) {
-					if(nombre.equals((Jugadores.get(i)).getNombre()) && apellido.equals((Jugadores.get(i)).getApellido() )){
-						int op = 0;
-						do {
-							System.out.println("***Menu de Modificar datos***");
-							System.out.println("1-Nombre");
-							System.out.println("2-Apellido");
-							System.out.println("3-Fecha de nacimiento");
-							System.out.println("4-Nacionalidad");
-							System.out.println("5-Estatura");
-							System.out.println("6-Peso");
-							System.out.println("7-Posicion");
-							System.out.println("8-Salir");
-							op = sc.nextInt();
-							switch (op) {
-								case 1:{
-									System.out.println("**Ingrese los datos del  jugador**");
-									System.out.println("Nombre: ");
-									String Nombre = sc.next();
-									Jugadores.get(i).setNombre(Nombre);
-									break;
-								}
-								case 2:{
-									System.out.println("Apellido: ");
-									String Apellido = sc.next();
-									Jugadores.get(i).setApellido(Apellido);
-									break;
-								}
-								case 3:{
-									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-									Boolean b = false;
-									LocalDate FechaN = null;
-									
-									System.out.println("Fecha de Nacimiento (yyyy-MM-dd): ");
-									do{
-										String Fecha = sc.next();
-										try {
-											FechaN = LocalDate.parse(Fecha, formatter);
-											b = true;
-										}catch (Exception e) {
-											System.out.println("La fecha ingresada no es válida. Asegúrate de que esté en el formato correcto (yyyy-MM-dd).");
-											System.out.println("Ingrese otra vez la fecha: ");
+						System.out.println("**Modificar Datos**");
+						System.out.println("Ingrese el nombre del jugador: ");
+						String nombre = sc.next();
+						System.out.println("Ingrese el apellido del jugador: ");
+						String apellido = sc.next();
+						
+						for (Jugador j : Jugadores) {
+							if(nombre.equals(j.getNombre()) && apellido.equals(j.getApellido())){
+								int op = 0;
+								do {
+									System.out.println("***Menu de Modificar datos***");
+									System.out.println("1-Nombre");
+									System.out.println("2-Apellido");
+									System.out.println("3-Fecha de nacimiento");
+									System.out.println("4-Nacionalidad");
+									System.out.println("5-Estatura");
+									System.out.println("6-Peso");
+									System.out.println("7-Posicion");
+									System.out.println("8-Salir");
+									op = sc.nextInt();
+									switch (op) {
+										case 1:{
+											System.out.println("**Ingrese los datos del  jugador**");
+											System.out.println("Nombre: ");
+											String Nombre = sc.next();
+											j.setNombre(Nombre);
+											break;
 										}
-									}while(b != true);
-									break;
-								}
-								case 4:{
-									System.out.println("Nacionalidad: ");
-									String Nacionalidad = sc.next();
-									Jugadores.get(i).setNacionalidad(Nacionalidad);
-									break;
-								}
-								case 5:{
-									Boolean b = false;
-									do{
-										try {
-											float estatura = sc.nextFloat();
-											Jugadores.get(i).setEstatura(estatura);;
-											b = true;
-										}catch (Exception e) {
-											System.out.println("Ingreso mal el formato");
+										case 2:{
+											System.out.println("Apellido: ");
+											String Apellido = sc.next();
+											j.setApellido(Apellido);
+											break;
+										}
+										case 3:{
+											DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+											Boolean b = false;
+											LocalDate FechaN = null;
+											
+											System.out.println("Fecha de Nacimiento (yyyy-MM-dd): ");
+											do{
+												String Fecha = sc.next();
+												try {
+													FechaN = LocalDate.parse(Fecha, formatter);
+													j.setFechaNac(FechaN);
+													b = true;
+												}catch (Exception e) {
+													System.out.println("La fecha ingresada no es válida. Asegúrate de que esté en el formato correcto (yyyy-MM-dd).");
+													System.out.println("Ingrese otra vez la fecha: ");
+												}
+											}while(b != true);
+											
+											break;
+										}
+										case 4:{
+											System.out.println("Nacionalidad: ");
+											String Nacionalidad = sc.next();
+											j.setNacionalidad(Nacionalidad);
+											break;
+										}
+										case 5:{
+											Boolean b = false;
+											do{
+												try {
+													float estatura = sc.nextFloat();
+													j.setEstatura(estatura);
+													b = true;
+												}catch (Exception e) {
+													System.out.println("Ingreso mal el formato");
+													System.out.println("Ingrese otra vez: ");
+													sc.nextLine();
+												}
+											}while(b != true);
+											break;
+										}
+										case 6:{
+											Boolean b = false;
+											do{
+												try {
+													float peso = sc.nextFloat();
+													j.setPeso(peso);
+													b = true;
+												}catch (Exception e) {
+													System.out.println("Ingreso mal el formato");
+													System.out.println("Ingrese otra vez: ");
+													sc.nextLine();
+												}
+											}while(b != true);
+											break;
+										}
+										case 7:{
+											Boolean b = false;
+											
+											System.out.println("Posicion (delantero, medio, defensa, arquero): ");
+											
+											do {
+												String posicion = sc.next();
+												if(posicion.equals("delantero") || posicion.equals("medio") || posicion.equals("defensa") || posicion.equals("arquero")){
+													j.setPosicion(posicion);
+													b = true;
+												}
+												else {
+													System.out.println("Ingreso mal la posicion");
+													System.out.println("Ingrese otra vez:");
+												}
+											}while(b != true);
+											break;
+										}
+										default :{
+											System.out.println("Ingreso mal la opcion");
 											System.out.println("Ingrese otra vez: ");
-											sc.nextLine();
+											break;
 										}
-									}while(b != true);
-									break;
-								}
-								case 6:{
-									Boolean b = false;
-									do{
-										try {
-											float peso = sc.nextFloat();
-											Jugadores.get(i).setPeso(peso);;
-											b = true;
-										}catch (Exception e) {
-											System.out.println("Ingreso mal el formato");
-											System.out.println("Ingrese otra vez: ");
-											sc.nextLine();
-										}
-									}while(b != true);
-									break;
-								}
-								case 7:{
-									Boolean b = false;
 									
-									System.out.println("Posicion (delantero, medio, defensa, arquero): ");
-									
-									do {
-										String posicion = sc.next();
-										if(posicion.equals("delantero") || posicion.equals("medio") || posicion.equals("defensa") || posicion.equals("arquero")){
-											Jugadores.get(i).setPosicion(posicion);
-											b = true;
-										}
-										else {
-											System.out.println("Ingreso mal la posicion");
-											System.out.println("Ingrese otra vez:");
-										}
-									}while(b != true);
-									break;
-								}
-								default :{
-									break;
-								}
-							
+									}
+								}while(op != 8);
+								band = true;
+								break;
 							}
-						}while(op != 8);
-						band = true;
-						break;
-					}
-				}
-				if (band == false) {
-					System.out.println("No se encontro el jugador con nombre " + nombre + " y apellido " + apellido);
-				}
+						}
+						if (band == false) {
+							System.out.println("No se encontro el jugador con nombre " + nombre + " y apellido " + apellido);
+						}
+					
 				break;
 			}
 			case 5:{
 				Boolean band = false;
 				
-				System.out.println("**Eliminar Jugador**");
-				System.out.println("Ingrese el nombre del jugador: ");
-				String nombre = sc.next();
-				System.out.println("Ingrese el apellido del jugador: ");
-				String apellido = sc.next();
-				
-				for (int i = 0 ; i < CantJugador ; i ++) {
-					
-					if(	nombre.equals((Jugadores.get(i)).getNombre()) && apellido.equals((Jugadores.get(i)).getApellido()) ){
-						Jugadores.remove(i);
-						band = true;
-						CantJugador --;
-						break;
+				do {
+					try {
+						System.out.println("**Eliminar Jugador**");
+						System.out.println("Ingrese el nombre del jugador: ");
+						String nombre = sc.next();
+						System.out.println("Ingrese el apellido del jugador: ");
+						String apellido = sc.next();
+						
+						for (Jugador j : Jugadores) {
+							
+							if(	nombre.equals(j.getNombre()) && apellido.equals(j.getApellido()) ){
+								Jugadores.remove(j);
+								band = true;
+								CantJugador --;
+								break;
+							}
+						}
+						if(band == false) {
+							System.out.println("No se encontro el jugador con nombre " + nombre + " y apellido " + apellido);
+						}
+					}catch(Exception e) {
+						System.out.println("Igreso mal la nacionalidad");
+						System.out.println("Ingrese otra vez: ");
 					}
-				}
-				if(band == false) {
-					System.out.println("No se encontro el jugador con nombre " + nombre + " y apellido " + apellido);
-				}
+				}while(band != true);
+				
 				break;
 			}
 			case 6:{
@@ -296,20 +317,26 @@ public class Main {
 			}
 			case 7:{
 				int contador = 0;
-				
-				
-				System.out.println("**Cantidad de jugadores por nacionalidad**");
-				System.out.println("Ingrese la nacionalidad del jugador: ");
-				String nacionalidad = sc.next();
-				
-				for (int i = 0 ; i < CantJugador ; i ++) {
-					
-					if( nacionalidad.equals((Jugadores.get(i)).getNacionalidad()) ){
-						contador ++;		
+				Boolean band = false;
+				do {
+					try {
+						System.out.println("**Cantidad de jugadores por nacionalidad**");
+						System.out.println("Ingrese la nacionalidad del jugador: ");
+						String nacionalidad = sc.next();
+						
+						for (Jugador j : Jugadores) {
+							
+							if( nacionalidad.equals(j.getNacionalidad()) ){
+								contador ++;		
+							}
+						}
+						System.out.println("Hay " + contador + " jugadores con nacionalidad " + nacionalidad);
+						band = true;
+					}catch(Exception e) {
+						System.out.println("Igreso mal la nacionalidad");
+						System.out.println("Ingrese otra vez: ");
 					}
-				}
-				System.out.println("Hay " + contador + " jugadores con nacionalidad " + nacionalidad);
-				
+				}while(band != true);
 				break;
 			}
 			case 8:{

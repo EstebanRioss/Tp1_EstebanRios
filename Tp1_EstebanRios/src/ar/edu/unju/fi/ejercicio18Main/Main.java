@@ -22,7 +22,7 @@ public class Main {
 		
 		ArrayList<DestinoTuristico> ListaDestino = new ArrayList<>();
 		Scanner sc = new Scanner (System.in);
-		int Opcion = 0,CantDestino = 0;
+		int Opcion = 0, CantDestino = 0;
 		
 		do {
 			System.out.println("***Menu***");
@@ -61,10 +61,11 @@ public class Main {
 						System.out.println("Codigo: ");
 						String codigo = sc.next();
 						Destino.setCodigo(codigo);
-					band = true;
-					} catch(Exception e) {
+						band = true;
+					}catch (Exception e) {
 						System.out.println("Ingreso mal el codigo");
 					}
+					
 					}while(band != true);
 				band = false;
 				
@@ -83,15 +84,49 @@ public class Main {
 				
 				
 				do {
-					System.out.println("Ingrese el codigo del pais: ");
-					String CodigoP = sc.next();
-					
-					for (int i = 0 ; i < CantP ; i++) {
-						if( CodigoP.equals(ListaPaises.get(i).getCodigo())) {
-							Destino.setPais(ListaPaises.get(i));
-							band = true;
+					try {
+						System.out.println("Elija un codigo del pais: ");
+						System.out.println("1)Ar-0000 Argentina");
+						System.out.println("2)Br-0001 Brazil");
+						System.out.println("3)Mx-0002 Mexico");
+						System.out.println("4)EC-0003 Ecuador");
+						System.out.println("5)PE-0004 Peru");
+						System.out.println("6)UR-0005 Uruguay");
+						int op = sc.nextInt();
+						switch(op) {
+						case 1:{
+							Destino.setPais(pais1);
+							break;
 						}
+						case 2:{
+							Destino.setPais(pais2);
+							break;
+						}
+						case 3:{
+							Destino.setPais(pais3);
+							break;
+						}
+						case 4:{
+							Destino.setPais(pais4);
+							break;
+						}
+						case 5:{
+							Destino.setPais(pais5);
+							break;
+						}
+						case 6:{
+							Destino.setPais(pais6);
+							break;
+						}
+						default:{
+							System.out.println("Ingreso mal el codigo");
+							break;
+						}
+					}	
 						
+					band = true;
+					} catch(Exception e) {
+						System.out.println("Ingreso mal el codigo");
 					}
 				}while (band != true);
 				band = false;
@@ -108,48 +143,81 @@ public class Main {
 					}while(band != true);
 				band = false;
 				
-				ListaDestino.add(CantDestino,Destino);
+				ListaDestino.add(Destino);
 				CantDestino++;
 				
 				break;
 			}
 			case 2:{
 				System.out.println("**Mostrar todos los destinos**");
-				for(int i = 0 ; i < CantDestino ; i++) {
-					ListaDestino.get(i).MostraDatos();
+				
+				for(DestinoTuristico dt : ListaDestino) {
+					dt.MostraDatos();
 				}
 				break;
 			}
 			case 3:{
-				Boolean band = false;
-				
-				System.out.println("**Modificar el pais de un destino turistico**");
-				System.out.println("Ingrese el nombre del destino turistico: ");
-				String nombre = sc.next();
-				
-				for(int i = 0 ; i < CantDestino ; i ++) {
-					if(nombre.equals(ListaDestino.get(i).getNombre())){
-						Boolean b = false;
-						do {
-							System.out.println("Ingrese el codigo del nuevo pais: ");
-							String codigo = sc.next();
-							
-							for (int p = 0 ; p < CantP ; p++) {
-								if( codigo.equals(ListaPaises.get(p).getCodigo())) {
-									ListaDestino.get(i).setPais(ListaPaises.get(p));
-									b = true;
-								}
+				Boolean band =false;
+				do {
+					try {
+					System.out.println("**Modificar el pais de un destino turistico**");
+					System.out.println("Ingrese el nombre del destino: ");
+					String nombre = sc.next();
+					for(DestinoTuristico dt1 : ListaDestino) {
+							if(nombre.equals(dt1.getNombre())){
+								
+									System.out.println("Elija un codigo del pais: ");
+									System.out.println("1)Ar-0000 Argentina");
+									System.out.println("2)Br-0001 Brazil");
+									System.out.println("3)Mx-0002 Mexico");
+									System.out.println("4)EC-0003 Ecuador");
+									System.out.println("5)PE-0004 Peru");
+									System.out.println("6)UR-0005 Uruguay");
+									int op = sc.nextInt();
+									switch(op) {
+										case 1:{
+											dt1.setPais(pais1);
+											break;
+										}
+										case 2:{
+											dt1.setPais(pais2);
+											break;
+										}
+										case 3:{
+											dt1.setPais(pais3);
+											break;
+										}
+										case 4:{
+											dt1.setPais(pais4);
+											break;
+										}
+										case 5:{
+											dt1.setPais(pais5);
+											break;
+										}
+										case 6:{
+											dt1.setPais(pais6);
+											break;
+										}
+										default:{
+											System.out.println("Ingreso mal el codigo");
+											break;
+										}
+									
+									}
+								band = true;
+								break;
 							}
-						}while (b != true);
-					band = true;
+							else {
+								System.out.println("No se encuentra es destino");
+							}
 					}
-				}
-				if(band == false) {
-					System.out.println("No hay ningun destino con ese nombre");
-				}
-				
+					}catch(Exception e) {
+						System.out.println("Ingreso mal el nombre");
+					}
+				}while(band != true);
 				break;
-			}
+				}
 			case 4:{
 				System.out.println("**Eliminar todos los destino turisticos**");
 				ListaDestino.clear();
@@ -158,20 +226,23 @@ public class Main {
 			}
 			case 5:{
 				Boolean band = false;
-				
-				System.out.println("**Eliminar un destino turistico**");
-				System.out.println("Codigo: ");
-				String codigo = sc.next();
-				for(int i = 0; i < CantDestino ; i++){
-					if (codigo.equals(ListaDestino.get(i).getCodigo())){
-						ListaDestino.remove(i);
-						CantDestino--;
-						band = true;
-						break;
+				try {
+					System.out.println("**Eliminar un destino turistico**");
+					System.out.println("Codigo: ");
+					String codigo = sc.next();
+					for(DestinoTuristico dt : ListaDestino){
+						if (codigo.equals(dt.getCodigo())){
+							ListaDestino.remove(dt);
+							CantDestino--;
+							band = true;
+							break;
+						}
 					}
-				}
-				if(band == false) {
-					System.out.println("No hay ningun destino con ese codigo");
+					if(band == false) {
+						System.out.println("No hay ningun destino con ese codigo");
+					}
+				}catch(Exception e) {
+					System.out.println("Ingreso mal el codigo");
 				}
 				break;
 			}
@@ -186,27 +257,92 @@ public class Main {
 			}
 			case 7:{
 				System.out.println("**Mostrar datos de todos los paises**");
-				for(int  i = 0; i < CantP ; i++){
-					ListaPaises.get(i).MostrarDatos();
+				for(Pais p : ListaPaises){
+					p.MostrarDatos();
 				}
 				break;
 			}
 			case 8:{
 				Boolean band = false;
+				do {
 				
-				System.out.println("**Mostrar destino que tengan el mismo pais**");
-				System.out.println("Codigo: ");
-				String codigo = sc.next();
-				
-				for(int i = 0 ; i < CantDestino; i ++) {
-					if(codigo.equals(ListaDestino.get(i).getPais().getCodigo())) {
-						ListaDestino.get(i).MostraDatos();
+					System.out.println("**Mostrar destino que tengan el mismo pais**");
+					System.out.println("");
+					System.out.println("Elija un codigo del pais: ");
+					System.out.println("1)Ar-0000 Argentina");
+					System.out.println("2)Br-0001 Brazil");
+					System.out.println("3)Mx-0002 Mexico");
+					System.out.println("4)EC-0003 Ecuador");
+					System.out.println("5)PE-0004 Peru");
+					System.out.println("6)UR-0005 Uruguay");
+					int codigo = sc.nextInt();
+					switch (codigo){
+					case 1:{
+						for(DestinoTuristico dt : ListaDestino) {
+							if(dt.getPais().getCodigo().equals("Ar-0000")) {
+								dt.MostraDatos();
+							}
+						}
 						band = true;
+						break;
 					}
-				}
+					case 2:{
+						for(DestinoTuristico dt : ListaDestino) {
+							if(dt.getPais().getCodigo().equals("Br-0001")) {
+								dt.MostraDatos();
+							}
+						}
+						band = true;
+						break;
+					}
+					case 3:{
+						for(DestinoTuristico dt : ListaDestino) {
+							if(dt.getPais().getCodigo().equals("Mx-0002")) {
+								dt.MostraDatos();
+							}
+						}
+						band = true;
+						break;
+					}
+					case 4:{
+						for(DestinoTuristico dt : ListaDestino) {
+							if(dt.getPais().getCodigo().equals("EC-0003")) {
+								dt.MostraDatos();
+							}
+						}
+						band = true;
+						break;
+					}
+					case 5:{
+						for(DestinoTuristico dt : ListaDestino) {
+							if(dt.getPais().getCodigo().equals("PE-0004")) {
+								dt.MostraDatos();
+							}
+						}
+						band = true;
+						break;
+					}
+					case 6:{
+						for(DestinoTuristico dt : ListaDestino) {
+							if(dt.getPais().getCodigo().equals("UR-0005")) {
+								dt.MostraDatos();
+							}
+						}
+						band = true;
+						break;
+					}
+					default:{
+						System.out.println("Ingreso mal el codigo");
+						break;
+					}
+					}
+					
+				}while(band != true);
+				
 				if(band == false) {
 					System.out.println("No hay ningun destino con ese codigo");
 				}
+				break;
 			}
 			case 9:{
 				System.out.println("Fin del programa");
@@ -220,6 +356,8 @@ public class Main {
 		}while(Opcion != 9);
 		
 		sc.close();
+	
 	}
+
 
 }
